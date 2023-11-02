@@ -20,21 +20,21 @@ import java.awt.font.*;
 public class Interface {
 	
 	public static void main(String[] args) {
-		JFrame inicio = new JFrame("Ventana de inicio");
-		inicio.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		JFrame ventanaDeInicio = new JFrame("Ventana de inicio");
+		ventanaDeInicio.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Dimension tamañoVentana = Toolkit.getDefaultToolkit().getScreenSize();
 		
-		JPanel inicial = new JPanel();
-		inicio.add(inicial);
-		inicial.setLayout(new BorderLayout());
+		JPanel textoDeInicio = new JPanel();
+		ventanaDeInicio.add(textoDeInicio);
+		textoDeInicio.setLayout(new BorderLayout());
 		
 		JLabel texto = new JLabel();
-		texto.setText("<html>Hola bienvenido a nuestro proyecto de aventura conversacional, en el que podras elegir entre hacer un test para determinar tu casa de la conocida saga Harry Potter o vivir una aventura dentro de su mundo");
+		texto.setText("<html>Hola bienvenido a nuestro proyecto de aventura conversacional, en el que podras elegir entre hacer un test para determinar tu casa de la conocida saga Harry Potter o vivir una aventura dentro de su mundo</html>");
 		texto.setFont(new Font("Arial", Font.BOLD, 14));
         
-        inicial.add(texto, BorderLayout.CENTER);
+        textoDeInicio.add(texto, BorderLayout.CENTER);
         texto.setVerticalAlignment(SwingConstants.TOP);
-        inicial.setBorder(new EmptyBorder (79,70,70,70));
+        textoDeInicio.setBorder(new EmptyBorder (79,70,70,70));
         
         JButton sombreroSeleccionador = new JButton("Sombrero Seleccionador");
         JButton magoOMuggle = new JButton("Mago o Muggle");
@@ -46,7 +46,7 @@ public class Interface {
         panelBotones2.add(magoOMuggle, BorderLayout.WEST);
         panelBotones2.add(sombreroSeleccionador, BorderLayout.EAST);
         
-        inicial.add(panelBotones2, BorderLayout.SOUTH);
+        textoDeInicio.add(panelBotones2, BorderLayout.SOUTH);
         
         buttonPanel2.setLayout(new BoxLayout(buttonPanel2, BoxLayout.X_AXIS));
         
@@ -55,7 +55,7 @@ public class Interface {
         buttonPanel2.add(Box.createRigidArea(new Dimension(30, 0)));
         buttonPanel2.add(sombreroSeleccionador);
         
-        inicial.add(buttonPanel2, BorderLayout.SOUTH);
+        textoDeInicio.add(buttonPanel2, BorderLayout.SOUTH);
        
         Dimension nuevoTamaño = new Dimension(100, 50);
         magoOMuggle.setPreferredSize(nuevoTamaño);
@@ -68,17 +68,16 @@ public class Interface {
             }
         });
 
-        sombreroSeleccionador.addActionListener(new ActionListener() {
+      /*  sombreroSeleccionador.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                VentanaPrincipal ventanaPrincipal = new VentanaPrincipal();
-                ventanaPrincipal.setVisible(true);            }
-        });
+                //Funcion para que abra la ventana del sombrero seleccionador            }
+        });*/
         
-        inicio.setSize(500,600);
-        inicio.setVisible(true);
+        ventanaDeInicio.setSize(500,600);
+        ventanaDeInicio.setVisible(true);
 	}
-}
+
 
 
     public static void ventanaPrincipal(String[] args) {
@@ -180,5 +179,62 @@ public class Interface {
        
         frame.setSize(600,400);
         frame.setVisible(true);
+    }
+    
+    public static void ventanaResultado(String[] args) {
+    	JFrame ventanaFinal = new JFrame("Ventana de Resultado");
+		ventanaFinal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Dimension tamañoVentana = Toolkit.getDefaultToolkit().getScreenSize();
+		
+		JPanel explicacionResultado = new JPanel();
+		ventanaFinal.add(explicacionResultado);
+		explicacionResultado.setLayout(new BorderLayout());
+		
+		JLabel explicacion = new JLabel();
+		explicacion.setText("<html>Tu casa es fesifhiusf porque noseque noscuantos y lo que sea</html>");
+		explicacion.setFont(new Font("Arial", Font.BOLD, 14));
+        
+        explicacionResultado.add(explicacion, BorderLayout.CENTER);
+        explicacion.setVerticalAlignment(SwingConstants.TOP);
+        explicacionResultado.setBorder(new EmptyBorder (79,70,70,70));
+        
+        JButton comienzo = new JButton("Volver a intentar");
+        
+        
+        JPanel panelBotones3 = new JPanel();
+        panelBotones3.setLayout( new BorderLayout());
+        JPanel buttonPanel3 =new JPanel();
+        
+        panelBotones3.add(comienzo, BorderLayout.EAST);
+        
+        explicacionResultado.add(panelBotones3, BorderLayout.SOUTH);
+        
+        buttonPanel3.setLayout(new BoxLayout(buttonPanel3, BoxLayout.X_AXIS));
+        
+        buttonPanel3.add(Box.createRigidArea(new Dimension(10, 0))); // Ajusta el valor 10 según tus necesidades
+        buttonPanel3.add(comienzo);
+
+        
+        explicacionResultado.add(buttonPanel3, BorderLayout.SOUTH);
+       
+        Dimension nuevoTamaño = new Dimension(100, 50);
+        comienzo.setPreferredSize(nuevoTamaño);
+
+		comienzo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Hacer que el boton te mande a la ventana inicial
+            }
+        });
+
+
+        
+        ventanaFinal.setSize(500,600);
+        ventanaFinal.setVisible(true);
+	
+
+    	
+    	
+    	
     }
 }
