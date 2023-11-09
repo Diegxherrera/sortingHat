@@ -25,3 +25,10 @@
 ### Changed
 
 ### Fixed
+## (1.0.3-alpha) - 9nd November 2023
+
+### Added
+  - Finished the four results screen (each one for a different house) and added small changes to sizes and fonts.
+### Changed
+
+### Fixed
