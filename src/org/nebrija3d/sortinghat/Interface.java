@@ -1,211 +1,195 @@
 package org.nebrija3d.sortinghat;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JFrame;
 import javax.swing.ImageIcon;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 import java.awt.*;
-import java.awt.Event;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.font.*;
-import java.awt.image.BufferedImage;
 
 public class Interface {
-	
-	static JPanel imagenResultado;
-	private static  JLabel imagenDeLaCasa1;
-	private static  ImageIcon imagen;
-	
-	public static void main(String[] args) {
-		JFrame ventanaDeInicio = new JFrame("Ventana de inicio");
-		ventanaDeInicio.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		Dimension tamañoVentana = Toolkit.getDefaultToolkit().getScreenSize();
-		// Cargar el ícono desde un archivo PNG
-        ImageIcon icono = new ImageIcon("C:/Users/Alex/Documents/GitHub/sortingHat/src/org/nebrija3d/resources/HarryPoterLogo.png");
+
+    public static void main(String[] args) {
+        JFrame ventanaDeInicio = new JFrame("Sorting Hat");
+        ventanaDeInicio.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ventanaDeInicio.setSize(500,600);
+        ventanaDeInicio.setResizable(false);
+        ventanaDeInicio.setLocationRelativeTo(null);
+        // Cargar el ícono desde un archivo PNG
+        ImageIcon icono = new ImageIcon("");
 
         // Establecer el ícono en la ventana principal
         ventanaDeInicio.setIconImage(icono.getImage());
-		
-		JPanel textoDeInicio = new JPanel();
-		ventanaDeInicio.add(textoDeInicio);
-		textoDeInicio.setLayout(new BorderLayout());
-		
-		JLabel texto = new JLabel();
-		texto.setText("<html>Hola bienvenido a nuestro proyecto de aventura conversacional, en el que podras elegir entre hacer un test para determinar tu casa de la conocida saga Harry Potter o vivir una aventura dentro de su mundo</html>");
-		texto.setFont(new Font("Arial", Font.BOLD, 18));
-        
+
+        JPanel textoDeInicio = new JPanel();
+        ventanaDeInicio.add(textoDeInicio);
+        textoDeInicio.setLayout(new BorderLayout());
+
+        JLabel texto = new JLabel();
+        texto.setText("<html>Bienvenido a esta aventura conversacional," +
+                " en el que podras elegir entre hacer un test para determinar tu casa de " +
+                "la conocida saga Harry Potter o vivir una aventura y por el camino descubrir si eres" +
+                "un mago o un muggle.</html>");
+        texto.setFont(new Font("Arial", Font.BOLD, 18));
+
         textoDeInicio.add(texto, BorderLayout.CENTER);
         texto.setVerticalAlignment(SwingConstants.TOP);
         textoDeInicio.setBorder(new EmptyBorder (79,70,70,70));
-        
+
         JButton sombreroSeleccionador = new JButton("Sombrero Seleccionador");
         JButton magoOMuggle = new JButton("Mago o Muggle");
-        
+
         JPanel panelBotones2 = new JPanel();
         panelBotones2.setLayout( new BorderLayout());
         JPanel buttonPanel2 =new JPanel();
-        
+
         panelBotones2.add(magoOMuggle, BorderLayout.WEST);
         panelBotones2.add(sombreroSeleccionador, BorderLayout.EAST);
-        
+
         textoDeInicio.add(panelBotones2, BorderLayout.SOUTH);
-        
+
         buttonPanel2.setLayout(new BoxLayout(buttonPanel2, BoxLayout.X_AXIS));
-        
+
         buttonPanel2.add(Box.createRigidArea(new Dimension(10, 0))); // Ajusta el valor 10 según tus necesidades
         buttonPanel2.add(magoOMuggle);
         buttonPanel2.add(Box.createRigidArea(new Dimension(30, 0)));
         buttonPanel2.add(sombreroSeleccionador);
-        
+
         textoDeInicio.add(buttonPanel2, BorderLayout.SOUTH);
-       
+
         Dimension nuevoTamaño = new Dimension(100, 50);
         magoOMuggle.setPreferredSize(nuevoTamaño);
         sombreroSeleccionador.setPreferredSize(nuevoTamaño);
 
-		magoOMuggle.addActionListener(new ActionListener() {
+        magoOMuggle.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                texto.setText("Has elegido Mago o Muggle");
+                ventanaDeInicio.dispose();
+                ventanaDePreguntas();
             }
         });
 
-       /* sombreroSeleccionador.addActionListener(new ActionListener() {
+        sombreroSeleccionador.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Funcion para que abra la ventana del sombrero seleccionador            }
-        });*/
-        
-        ventanaDeInicio.setSize(500,600);
+                ventanaDeInicio.dispose();
+                ventanaDePreguntas();
+            }
+        });
         ventanaDeInicio.setVisible(true);
-	}
-	
+    }
 
-
-   public static void ventanaDePreguntas(String[] args) {
-        JFrame frame = new JFrame("Ventana con Botones");
+    public static void ventanaDePreguntas() {
+        JFrame frame = new JFrame("Sorting Hat");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        double width = screenSize.getWidth();
-        double height = screenSize.getHeight();
-        
+        frame.setSize(600,400);
+        frame.setResizable(false);
+        frame.setLocationRelativeTo(null);
+
         // Cargar el ícono desde un archivo PNG
         ImageIcon icono = new ImageIcon("C:/Users/Alex/Documents/GitHub/sortingHat/src/org/nebrija3d/resources/HarryPoterLogo.png");
 
         // Establecer el ícono en la ventana principal
         frame.setIconImage(icono.getImage());
-        
+
         // Panel principal
         JPanel panel = new JPanel();
         frame.add(panel);
         panel.setLayout(new BorderLayout());
-       
+
         //Texto 
-        JLabel label = new JLabel();
-        label.setText("<html>Hola aqui van las pregunta askffishfisuhfiwushfsuihf<br>wiugfeugyfiusfkushfisuhfiosefffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff<br>fffffffffgyjhszbfjshzbvhjbvkusbvkjxbvkjdhbvskjbvskjbvsjkbvsjbvjskbvjshbvcj dhj vjhvjhbjhvjvhjnv hgjv hgjvghv gnbvhgvjh</html>");
-        
-        label.setFont(new Font("Helvetica Neue", Font.PLAIN, 20));
-        
-        panel.add(label, BorderLayout.CENTER);
-        label.setVerticalAlignment(SwingConstants.TOP);
-       
-	
-       // JScrollPane scrollPane = new JScrollPane(label);
+        JLabel mainOutput = new JLabel();
+        mainOutput.setText("<HTML>" + SortingHat.getSortingHatData() + "<HTML>");
+
+        mainOutput.setFont(new Font("Helvetica Neue", Font.PLAIN, 20));
+
+        panel.add(mainOutput, BorderLayout.CENTER);
+        mainOutput.setVerticalAlignment(SwingConstants.CENTER);
+
+        // JScrollPane scrollPane = new JScrollPane(label);
         JPanel panelLabel =new JPanel(new BorderLayout());
-        panel.setBorder(new EmptyBorder (79,70,70,70));
+        panel.setBorder(new EmptyBorder (50,50,70,50));
         //panel.add(scrollPane, BorderLayout.CENTER)
 
         // Botones
-        JButton boton1 = new JButton("Opción 1");
-        JButton boton2 = new JButton("Opción 2");
-        JButton boton3 = new JButton("Opción 3");
-        
+        JButton boton1 = new JButton("A");
+        JButton boton2 = new JButton("B");
+        JButton boton3 = new JButton("C");
+        JButton boton4 = new JButton("D");
+
         JPanel panelBotones = new JPanel();
         panelBotones.setLayout( new BorderLayout());
-        JPanel buttonPanel =new JPanel();
-        
-        
-        panelBotones.add(boton1, BorderLayout.WEST);
-        panelBotones.add(boton2, BorderLayout.CENTER);
-        panelBotones.add(boton3, BorderLayout.EAST);
-        
-        frame.add(panelBotones, BorderLayout.SOUTH);
+        JPanel buttonPanel = new JPanel();
 
-        // Establecer el layout del panel como BoxLayout con eje X para separar los botones
+        panelBotones.add(boton1);
+        panelBotones.add(boton2);
+        panelBotones.add(boton3);
+        panelBotones.add(boton4);
+
+        frame.add(panelBotones, BorderLayout.SOUTH);
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
 
         // Agregar un espacio rígido entre los botones para la separación
-        buttonPanel.add(Box.createRigidArea(new Dimension(10, 0))); // Ajusta el valor 10 según tus necesidades
         buttonPanel.add(boton1);
-        buttonPanel.add(Box.createRigidArea(new Dimension(135, 0)));
+        buttonPanel.add(Box.createRigidArea(new Dimension(71, 0)));
         buttonPanel.add(boton2);
-        buttonPanel.add(Box.createRigidArea(new Dimension(140, 0)));
+        buttonPanel.add(Box.createRigidArea(new Dimension(71, 0)));
         buttonPanel.add(boton3);
+        buttonPanel.add(Box.createRigidArea(new Dimension(71, 0)));
+        buttonPanel.add(boton4);
 
         // Agregar el panel en la región SOUTH del BorderLayout del frame
         frame.add(buttonPanel, BorderLayout.SOUTH);
-        
-        
+
         //Tamaño de los botones
         Dimension nuevoTamano = new Dimension(100, 50);
         boton1.setPreferredSize(nuevoTamano);
         boton2.setPreferredSize(nuevoTamano);
         boton3.setPreferredSize(nuevoTamano);
-        
+
 
         // Agregar acciones a los botones
         boton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                label.setText("Opción 1 seleccionada"); // Action listener para el boton mas a la izquierda
+                mainOutput.setText(SortingHat.getSortingHatData());
+                SortingHat.index++;
             }
         });
 
         boton2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                label.setText("Opción 2 seleccionada"); // Action listener para el boton central 
+                mainOutput.setText("Opción 2 seleccionada"); // Action listener para el boton central
+                SortingHat.index++;
             }
         });
 
         boton3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                label.setText("Opción 3 seleccionada"); // Action listener para el boton mas a la derecha, esta funcion cuando se da al boton se cambia el texto
+                mainOutput.setText("Opción 3 seleccionada"); // Action listener para el boton mas a la derecha, esta funcion cuando se da al boton se cambia el texto
                 //Añadir una funcion que cambie el texto a la siguiente pregunta y el texto de los botones a las siguientes opciones
             }
         });
-
-       
-        frame.setSize(600,400);
         frame.setVisible(true);
     }
-    
-    public static void ventanaDeGryffindor(String[] args) {
-    	
-  
+    public static void ventanaDeGryffindor() {
         JFrame ventanaFinal = new JFrame("Ventana de Resultado");
         ventanaFinal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // Crear un JPanel principal para contener todo
+        // Crear un JPanel principal para contenerlo
         JPanel panelPrincipal = new JPanel(new BorderLayout());
         ventanaFinal.add(panelPrincipal);
-        
+
         // Cargar el ícono desde un archivo PNG
         ImageIcon icono = new ImageIcon("C:/Users/Alex/Documents/GitHub/sortingHat/src/org/nebrija3d/resources/HarryPoterLogo.png");
 
         // Establecer el ícono en la ventana principal
-       ventanaFinal.setIconImage(icono.getImage());
+        ventanaFinal.setIconImage(icono.getImage());
 
         // Cargar la imagen
         ImageIcon imagen = new ImageIcon("C:/Users/Alex/Documents/GitHub/sortingHat/src/org/nebrija3d/resources/gryffindor-removebg-preview.png");
@@ -234,55 +218,52 @@ public class Interface {
         // Crear el botón
         JButton comienzo = new JButton("Volver a intentar");
 
-
         // Agregar el botón al panel de explicación
         JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         panelBotones.add(comienzo);
         explicacionResultado.add(panelBotones, BorderLayout.SOUTH);
         explicacion.setBorder(new EmptyBorder(0, 0, 0, 10));
         explicacionResultado.add(explicacion, BorderLayout.EAST);
-      
+
         JPanel panelBotones3 = new JPanel();
         panelBotones3.setLayout( new BorderLayout());
         JPanel buttonPanel3 =new JPanel();
-        
+
         panelBotones3.add(comienzo, BorderLayout.EAST);
-        
+
         explicacionResultado.add(panelBotones3, BorderLayout.SOUTH);
-        
+
         buttonPanel3.setLayout(new BoxLayout(buttonPanel3, BoxLayout.X_AXIS));
-        
-        buttonPanel3.add(Box.createRigidArea(new Dimension(500, 100))); // Ajusta el valor 10 según tus necesidades
+
+        buttonPanel3.add(Box.createRigidArea(new Dimension(500, 100)));
         buttonPanel3.add(comienzo);
 
-        
         explicacionResultado.add(buttonPanel3, BorderLayout.SOUTH);
-       
+
         Dimension nuevoTamaño = new Dimension(100, 50);
         comienzo.setPreferredSize(nuevoTamaño);
 
-		comienzo.addActionListener(new ActionListener() {
+        comienzo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Hacer que el boton te mande a la ventana inicial
             }
         });
-		
+
         // Ajustar el tamaño de la ventana
         ventanaFinal.pack();
         ventanaFinal.setSize(1150, 700);
         ventanaFinal.setVisible(true);
     }
-    public static void ventanaDeSlytherin(String[] args) {
-    	    	  
+    public static void ventanaDeSlytherin() {
         JFrame ventanaFinal = new JFrame("Ventana de Resultado");
         ventanaFinal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel panelPrincipal = new JPanel(new BorderLayout());
         ventanaFinal.add(panelPrincipal);
-        
+
         ImageIcon icono = new ImageIcon("C:/Users/Alex/Documents/GitHub/sortingHat/src/org/nebrija3d/resources/HarryPoterLogo.png");
-       ventanaFinal.setIconImage(icono.getImage());
+        ventanaFinal.setIconImage(icono.getImage());
 
         ImageIcon imagen = new ImageIcon("C:/Users/Alex/Documents/GitHub/sortingHat/src/org/nebrija3d/resources/slytherin-removebg-preview.png");
 
@@ -298,7 +279,15 @@ public class Interface {
         JPanel explicacionResultado = new JPanel(new BorderLayout());
         panelPrincipal.add(explicacionResultado, BorderLayout.CENTER);
 
-        JLabel explicacion = new JLabel("<html>Eres de la casa Slytherin, famosa por su astucia y ambición. <br>Slytherin valora la inteligencia, la determinación y el poder, y <br> es muy probable que seas alguien que no tiene miedo de luchar por lo que quiere.<br> Como Slytherin, tienes un sentido innato de autoconservación y <br> eres capaz de tomar decisiones difíciles cuando es necesario. <br>Eres inteligente y táctico, siempre pensando en el siguiente paso antes de actuar.<br> Este pragmatismo te ayuda a lograr tus metas,<br> aunque a veces puedas parecer un poco calculador a los demás. <br>Eso no significa que no te importen las personas: puedes ser leal a aquellos que han ganado tu confianza y<br> siempre cuidarás de los tuyos. <br>Puedes ser misterioso y a veces intimidante, pero tu ambición y<br> tu deseo de éxito son simplemente inigualables</html>");
+        JLabel explicacion = new JLabel("<html>Eres de la casa Slytherin, famosa por su astucia y ambición. " +
+                "<br>Slytherin valora la inteligencia, la determinación y el poder, y <br> es muy probable que seas " +
+                "alguien que no tiene miedo de luchar por lo que quiere.<br> Como Slytherin, tienes un sentido " +
+                "innato de autoconservación y <br> eres capaz de tomar decisiones difíciles cuando es necesario. " +
+                "<br>Eres inteligente y táctico, siempre pensando en el siguiente paso antes de actuar." +
+                "<br> Este pragmatismo te ayuda a lograr tus metas,<br> aunque a veces puedas parecer un " +
+                "poco calculador a los demás. <br>Eso no significa que no te importen las personas: puedes ser leal a" +
+                " aquellos que han ganado tu confianza y<br> siempre cuidarás de los tuyos. <br>Puedes ser misterioso" +
+                " y a veces intimidante, pero tu ambición y<br> tu deseo de éxito son simplemente inigualables</html>");
         explicacion.setFont(new Font("Arial", Font.PLAIN, 18));
         explicacionResultado.add(explicacion, BorderLayout.EAST);
 
@@ -309,48 +298,48 @@ public class Interface {
         explicacionResultado.add(panelBotones, BorderLayout.SOUTH);
         explicacion.setBorder(new EmptyBorder(0, 0, 0, 10));
         explicacionResultado.add(explicacion, BorderLayout.EAST);
-      
+
         JPanel panelBotones3 = new JPanel();
         panelBotones3.setLayout( new BorderLayout());
         JPanel buttonPanel3 =new JPanel();
-        
+
         panelBotones3.add(comienzo, BorderLayout.EAST);
-        
+
         explicacionResultado.add(panelBotones3, BorderLayout.SOUTH);
-        
+
         buttonPanel3.setLayout(new BoxLayout(buttonPanel3, BoxLayout.X_AXIS));
-        
-        buttonPanel3.add(Box.createRigidArea(new Dimension(500, 100))); 
+
+        buttonPanel3.add(Box.createRigidArea(new Dimension(500, 100)));
         buttonPanel3.add(comienzo);
 
-        
+
         explicacionResultado.add(buttonPanel3, BorderLayout.SOUTH);
-       
+
         Dimension nuevoTamaño = new Dimension(100, 50);
         comienzo.setPreferredSize(nuevoTamaño);
 
-		comienzo.addActionListener(new ActionListener() {
+        comienzo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Hacer que el boton te mande a la ventana inicial
             }
         });
-		
+
         ventanaFinal.pack();
         ventanaFinal.setSize(1150, 700);
         ventanaFinal.setVisible(true);
     }
-    public static void ventanaDeHufflepuff(String[] args) {
-    	
-    	JFrame ventanaFinal = new JFrame("Ventana de Resultado");
+    public static void ventanaDeHufflepuff() {
+
+        JFrame ventanaFinal = new JFrame("Ventana de Resultado");
         ventanaFinal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel panelPrincipal = new JPanel(new BorderLayout());
         ventanaFinal.add(panelPrincipal);
-        
+
         ImageIcon icono = new ImageIcon("C:/Users/Alex/Documents/GitHub/sortingHat/src/org/nebrija3d/resources/HarryPoterLogo.png");
 
-       ventanaFinal.setIconImage(icono.getImage());
+        ventanaFinal.setIconImage(icono.getImage());
 
         ImageIcon imagen = new ImageIcon("C:/Users/Alex/Documents/GitHub/sortingHat/src/org/nebrija3d/resources/hufflepuff-removebg-preview.png");
 
@@ -377,48 +366,47 @@ public class Interface {
         explicacionResultado.add(panelBotones, BorderLayout.SOUTH);
         explicacion.setBorder(new EmptyBorder(0, 0, 0, 10));
         explicacionResultado.add(explicacion, BorderLayout.EAST);
-      
+
         JPanel panelBotones3 = new JPanel();
         panelBotones3.setLayout( new BorderLayout());
         JPanel buttonPanel3 =new JPanel();
-        
+
         panelBotones3.add(comienzo, BorderLayout.EAST);
-        
+
         explicacionResultado.add(panelBotones3, BorderLayout.SOUTH);
-        
+
         buttonPanel3.setLayout(new BoxLayout(buttonPanel3, BoxLayout.X_AXIS));
-        
-        buttonPanel3.add(Box.createRigidArea(new Dimension(500, 100))); 
+
+        buttonPanel3.add(Box.createRigidArea(new Dimension(500, 100)));
         buttonPanel3.add(comienzo);
 
-        
+
         explicacionResultado.add(buttonPanel3, BorderLayout.SOUTH);
-       
+
         Dimension nuevoTamaño = new Dimension(100, 50);
         comienzo.setPreferredSize(nuevoTamaño);
 
-		comienzo.addActionListener(new ActionListener() {
+        comienzo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Hacer que el boton te mande a la ventana inicial
             }
         });
-		
+
         ventanaFinal.pack();
         ventanaFinal.setSize(1150, 700);
         ventanaFinal.setVisible(true);
     }
-    public static void ventanaDeRavenclaw(String[] args) {
-    	
-    	JFrame ventanaFinal = new JFrame("Ventana de Resultado");
+    public static void ventanaDeRavenclaw() {
+        JFrame ventanaFinal = new JFrame("Ventana de Resultado");
         ventanaFinal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel panelPrincipal = new JPanel(new BorderLayout());
         ventanaFinal.add(panelPrincipal);
-        
+
         ImageIcon icono = new ImageIcon("C:/Users/Alex/Documents/GitHub/sortingHat/src/org/nebrija3d/resources/HarryPoterLogo.png");
 
-       ventanaFinal.setIconImage(icono.getImage());
+        ventanaFinal.setIconImage(icono.getImage());
 
         ImageIcon imagen = new ImageIcon("C:/Users/Alex/Documents/GitHub/sortingHat/src/org/nebrija3d/resources/ravenclaw-removebg-preview.png");
 
@@ -445,38 +433,34 @@ public class Interface {
         explicacionResultado.add(panelBotones, BorderLayout.SOUTH);
         explicacion.setBorder(new EmptyBorder(0, 0, 0, 10));
         explicacionResultado.add(explicacion, BorderLayout.EAST);
-      
+
         JPanel panelBotones3 = new JPanel();
         panelBotones3.setLayout( new BorderLayout());
         JPanel buttonPanel3 =new JPanel();
-        
+
         panelBotones3.add(comienzo, BorderLayout.EAST);
-        
+
         explicacionResultado.add(panelBotones3, BorderLayout.SOUTH);
-        
+
         buttonPanel3.setLayout(new BoxLayout(buttonPanel3, BoxLayout.X_AXIS));
-        
+
         buttonPanel3.add(Box.createRigidArea(new Dimension(500, 100))); // Ajusta el valor 10 según tus necesidades
         buttonPanel3.add(comienzo);
 
         explicacionResultado.add(buttonPanel3, BorderLayout.SOUTH);
-       
+
         Dimension nuevoTamaño = new Dimension(100, 50);
         comienzo.setPreferredSize(nuevoTamaño);
 
-		comienzo.addActionListener(new ActionListener() {
+        comienzo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Hacer que el boton te mande a la ventana inicial
             }
         });
-		
+
         ventanaFinal.pack();
         ventanaFinal.setSize(1150, 700);
         ventanaFinal.setVisible(true);
     }
-   
 }
-	
-
-
