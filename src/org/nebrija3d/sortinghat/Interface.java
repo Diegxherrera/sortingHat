@@ -1,16 +1,20 @@
 package org.nebrija3d.sortinghat;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JFrame;
-import javax.swing.ImageIcon;
+import javax.swing.border.*;
+import javax.xml.crypto.Data;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Interface {
+    public static String phaseKey = "0";
+    public static String gameSelection = "muggleOrWizard";
+    public static int sortingHatIndex = 0;
+    public static int gryffindorScore = 0;
+    public static int slytherinScore = 0;
+    public static int hufflepuffScore = 0;
+    public static int ravenclawScore = 0;
 
     public static void main(String[] args) {
         JFrame ventanaDeInicio = new JFrame("Sorting Hat");
@@ -18,10 +22,8 @@ public class Interface {
         ventanaDeInicio.setSize(500,600);
         ventanaDeInicio.setResizable(false);
         ventanaDeInicio.setLocationRelativeTo(null);
-        // Cargar el ícono desde un archivo PNG
-        ImageIcon icono = new ImageIcon("");
 
-        // Establecer el ícono en la ventana principal
+        ImageIcon icono = new ImageIcon("");
         ventanaDeInicio.setIconImage(icono.getImage());
 
         JPanel textoDeInicio = new JPanel();
@@ -60,13 +62,14 @@ public class Interface {
 
         textoDeInicio.add(buttonPanel2, BorderLayout.SOUTH);
 
-        Dimension nuevoTamaño = new Dimension(100, 50);
-        magoOMuggle.setPreferredSize(nuevoTamaño);
-        sombreroSeleccionador.setPreferredSize(nuevoTamaño);
+        Dimension nuevoTamano = new Dimension(100, 50);
+        magoOMuggle.setPreferredSize(nuevoTamano);
+        sombreroSeleccionador.setPreferredSize(nuevoTamano);
 
         magoOMuggle.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                gameSelection = "muggleOrWizard";
                 ventanaDeInicio.dispose();
                 ventanaDePreguntas();
             }
@@ -75,13 +78,13 @@ public class Interface {
         sombreroSeleccionador.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                gameSelection = "sortingHat";
                 ventanaDeInicio.dispose();
                 ventanaDePreguntas();
             }
         });
         ventanaDeInicio.setVisible(true);
     }
-
     public static void ventanaDePreguntas() {
         JFrame frame = new JFrame("Sorting Hat");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -90,7 +93,7 @@ public class Interface {
         frame.setLocationRelativeTo(null);
 
         // Cargar el ícono desde un archivo PNG
-        ImageIcon icono = new ImageIcon("C:/Users/Alex/Documents/GitHub/sortingHat/src/org/nebrija3d/resources/HarryPoterLogo.png");
+        ImageIcon icono = new ImageIcon("");
 
         // Establecer el ícono en la ventana principal
         frame.setIconImage(icono.getImage());
@@ -100,19 +103,14 @@ public class Interface {
         frame.add(panel);
         panel.setLayout(new BorderLayout());
 
-        //Texto 
-        JLabel mainOutput = new JLabel();
-        mainOutput.setText("<HTML>" + SortingHat.getSortingHatData() + "<HTML>");
-
+        //Texto
+        JLabel mainOutput = new JLabel(DataManager.selectedGameChecker());
         mainOutput.setFont(new Font("Helvetica Neue", Font.PLAIN, 20));
 
         panel.add(mainOutput, BorderLayout.CENTER);
         mainOutput.setVerticalAlignment(SwingConstants.CENTER);
 
-        // JScrollPane scrollPane = new JScrollPane(label);
-        JPanel panelLabel =new JPanel(new BorderLayout());
         panel.setBorder(new EmptyBorder (50,50,70,50));
-        //panel.add(scrollPane, BorderLayout.CENTER)
 
         // Botones
         JButton boton1 = new JButton("A");
@@ -121,58 +119,81 @@ public class Interface {
         JButton boton4 = new JButton("D");
 
         JPanel panelBotones = new JPanel();
-        panelBotones.setLayout( new BorderLayout());
-        JPanel buttonPanel = new JPanel();
-
+        panelBotones.setLayout(new FlowLayout(FlowLayout.CENTER)); // Use FlowLayout for center alignment
         panelBotones.add(boton1);
         panelBotones.add(boton2);
         panelBotones.add(boton3);
         panelBotones.add(boton4);
 
+        if (phaseKey.equals("0")) {
+            boton2.setVisible(false);
+            boton3.setVisible(false);
+            boton4.setVisible(false);
+        }
+
+        if (gameSelection.equals("sortingHat")) {
+            boton2.setVisible(true);
+            boton3.setVisible(true);
+            boton4.setVisible(true);
+        }
+
         frame.add(panelBotones, BorderLayout.SOUTH);
-        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
 
-        // Agregar un espacio rígido entre los botones para la separación
-        buttonPanel.add(boton1);
-        buttonPanel.add(Box.createRigidArea(new Dimension(71, 0)));
-        buttonPanel.add(boton2);
-        buttonPanel.add(Box.createRigidArea(new Dimension(71, 0)));
-        buttonPanel.add(boton3);
-        buttonPanel.add(Box.createRigidArea(new Dimension(71, 0)));
-        buttonPanel.add(boton4);
-
-        // Agregar el panel en la región SOUTH del BorderLayout del frame
-        frame.add(buttonPanel, BorderLayout.SOUTH);
-
-        //Tamaño de los botones
-        Dimension nuevoTamano = new Dimension(100, 50);
-        boton1.setPreferredSize(nuevoTamano);
-        boton2.setPreferredSize(nuevoTamano);
-        boton3.setPreferredSize(nuevoTamano);
-
-
-        // Agregar acciones a los botones
         boton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                mainOutput.setText(SortingHat.getSortingHatData());
-                SortingHat.index++;
+                if (gameSelection.equals("muggleOrWizard")) {
+                    DataManager.nextPhaseKey("optionOne");
+                    String newContent = DataManager.getMuggleWizardData(Interface.phaseKey, "mainOutput");
+                    mainOutput.setText("<html>" + newContent + "</html>");
+                    if (!phaseKey.equals("0")) {
+                        boton2.setVisible(true);
+                    }
+                } else if (gameSelection.equals("sortingHat")) {
+                    gryffindorScore++;
+                    sortingHatIndex++;
+                    String newContent = DataManager.getSortingHatData(sortingHatIndex);
+                    mainOutput.setText("<html>" + newContent + "</html>");
+                }
             }
         });
 
         boton2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                mainOutput.setText("Opción 2 seleccionada"); // Action listener para el boton central
-                SortingHat.index++;
+                if (gameSelection.equals("muggleOrWizard")) {
+                    DataManager.nextPhaseKey("optionTwo");
+                    String newContent = DataManager.getMuggleWizardData(Interface.phaseKey, "mainOutput");
+                    mainOutput.setText("<html>" + newContent + "</html>");
+                    if (!phaseKey.equals("0")) {
+                        boton2.setVisible(true);
+                    }
+                } else if (gameSelection.equals("sortingHat")) {
+                    slytherinScore++;
+                    sortingHatIndex++;
+                    String newContent = DataManager.getSortingHatData(sortingHatIndex);
+                    mainOutput.setText("<html>" + newContent + "</html>");
+                }
             }
         });
 
         boton3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                mainOutput.setText("Opción 3 seleccionada"); // Action listener para el boton mas a la derecha, esta funcion cuando se da al boton se cambia el texto
-                //Añadir una funcion que cambie el texto a la siguiente pregunta y el texto de los botones a las siguientes opciones
+                hufflepuffScore++;
+                sortingHatIndex++;
+                String newContent = DataManager.getSortingHatData(sortingHatIndex);
+                mainOutput.setText("<html>" + newContent + "</html>");
+            }
+        });
+
+        boton4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ravenclawScore++;
+                sortingHatIndex++;
+                String newContent = DataManager.getSortingHatData(sortingHatIndex);
+                mainOutput.setText("<html>" + newContent + "</html>");
             }
         });
         frame.setVisible(true);
@@ -186,13 +207,13 @@ public class Interface {
         ventanaFinal.add(panelPrincipal);
 
         // Cargar el ícono desde un archivo PNG
-        ImageIcon icono = new ImageIcon("C:/Users/Alex/Documents/GitHub/sortingHat/src/org/nebrija3d/resources/HarryPoterLogo.png");
+        ImageIcon icono = new ImageIcon("../resources/HarryPoterLogo.png");
 
         // Establecer el ícono en la ventana principal
         ventanaFinal.setIconImage(icono.getImage());
 
         // Cargar la imagen
-        ImageIcon imagen = new ImageIcon("C:/Users/Alex/Documents/GitHub/sortingHat/src/org/nebrija3d/resources/gryffindor-removebg-preview.png");
+        ImageIcon imagen = new ImageIcon("../resources/gryffindor-removebg-preview.png");
 
         // Crear un JLabel para mostrar la imagen
         JLabel imagenDeLaCasa = new JLabel(imagen);
@@ -240,8 +261,8 @@ public class Interface {
 
         explicacionResultado.add(buttonPanel3, BorderLayout.SOUTH);
 
-        Dimension nuevoTamaño = new Dimension(100, 50);
-        comienzo.setPreferredSize(nuevoTamaño);
+        Dimension nuevoTamano = new Dimension(100, 50);
+        comienzo.setPreferredSize(nuevoTamano);
 
         comienzo.addActionListener(new ActionListener() {
             @Override
@@ -250,7 +271,7 @@ public class Interface {
             }
         });
 
-        // Ajustar el tamaño de la ventana
+        // Ajustar el tamano de la ventana
         ventanaFinal.pack();
         ventanaFinal.setSize(1150, 700);
         ventanaFinal.setVisible(true);
@@ -262,10 +283,10 @@ public class Interface {
         JPanel panelPrincipal = new JPanel(new BorderLayout());
         ventanaFinal.add(panelPrincipal);
 
-        ImageIcon icono = new ImageIcon("C:/Users/Alex/Documents/GitHub/sortingHat/src/org/nebrija3d/resources/HarryPoterLogo.png");
+        ImageIcon icono = new ImageIcon("../resources/HarryPoterLogo.png");
         ventanaFinal.setIconImage(icono.getImage());
 
-        ImageIcon imagen = new ImageIcon("C:/Users/Alex/Documents/GitHub/sortingHat/src/org/nebrija3d/resources/slytherin-removebg-preview.png");
+        ImageIcon imagen = new ImageIcon("../resources/slytherin-removebg-preview.png");
 
         JLabel imagenDeLaCasa = new JLabel(imagen);
 
@@ -315,8 +336,8 @@ public class Interface {
 
         explicacionResultado.add(buttonPanel3, BorderLayout.SOUTH);
 
-        Dimension nuevoTamaño = new Dimension(100, 50);
-        comienzo.setPreferredSize(nuevoTamaño);
+        Dimension nuevoTamano = new Dimension(100, 50);
+        comienzo.setPreferredSize(nuevoTamano);
 
         comienzo.addActionListener(new ActionListener() {
             @Override
@@ -337,11 +358,11 @@ public class Interface {
         JPanel panelPrincipal = new JPanel(new BorderLayout());
         ventanaFinal.add(panelPrincipal);
 
-        ImageIcon icono = new ImageIcon("C:/Users/Alex/Documents/GitHub/sortingHat/src/org/nebrija3d/resources/HarryPoterLogo.png");
+        ImageIcon icono = new ImageIcon("../resources/HarryPoterLogo.png");
 
         ventanaFinal.setIconImage(icono.getImage());
 
-        ImageIcon imagen = new ImageIcon("C:/Users/Alex/Documents/GitHub/sortingHat/src/org/nebrija3d/resources/hufflepuff-removebg-preview.png");
+        ImageIcon imagen = new ImageIcon("../resources/hufflepuff-removebg-preview.png");
 
         JLabel imagenDeLaCasa = new JLabel(imagen);
 
@@ -376,15 +397,13 @@ public class Interface {
         explicacionResultado.add(panelBotones3, BorderLayout.SOUTH);
 
         buttonPanel3.setLayout(new BoxLayout(buttonPanel3, BoxLayout.X_AXIS));
-
         buttonPanel3.add(Box.createRigidArea(new Dimension(500, 100)));
         buttonPanel3.add(comienzo);
 
-
         explicacionResultado.add(buttonPanel3, BorderLayout.SOUTH);
 
-        Dimension nuevoTamaño = new Dimension(100, 50);
-        comienzo.setPreferredSize(nuevoTamaño);
+        Dimension nuevoTamano = new Dimension(100, 50);
+        comienzo.setPreferredSize(nuevoTamano);
 
         comienzo.addActionListener(new ActionListener() {
             @Override
@@ -404,11 +423,11 @@ public class Interface {
         JPanel panelPrincipal = new JPanel(new BorderLayout());
         ventanaFinal.add(panelPrincipal);
 
-        ImageIcon icono = new ImageIcon("C:/Users/Alex/Documents/GitHub/sortingHat/src/org/nebrija3d/resources/HarryPoterLogo.png");
+        ImageIcon icono = new ImageIcon("../resources/HarryPoterLogo.png");
 
         ventanaFinal.setIconImage(icono.getImage());
 
-        ImageIcon imagen = new ImageIcon("C:/Users/Alex/Documents/GitHub/sortingHat/src/org/nebrija3d/resources/ravenclaw-removebg-preview.png");
+        ImageIcon imagen = new ImageIcon("../resources/ravenclaw-removebg-preview.png");
 
         JLabel imagenDeLaCasa = new JLabel(imagen);
 
@@ -449,8 +468,8 @@ public class Interface {
 
         explicacionResultado.add(buttonPanel3, BorderLayout.SOUTH);
 
-        Dimension nuevoTamaño = new Dimension(100, 50);
-        comienzo.setPreferredSize(nuevoTamaño);
+        Dimension nuevoTamano = new Dimension(100, 50);
+        comienzo.setPreferredSize(nuevoTamano);
 
         comienzo.addActionListener(new ActionListener() {
             @Override

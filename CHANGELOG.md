@@ -1,6 +1,23 @@
 # Changelog
 
-## (2.0-alpha) - 23rd Nov 2023
+## (2.1-alpha) - 26/11/2023
+
+### Added
+- Now, `ventanaDePreguntas()` works for both games: Sorting Hat + Muggle or Wizard.
+  - Sorting hat now has a score counter for each of the HP houses.
+  - Button action listeners have logic to continue each game.
+### Changed
+- Phases system got a redesign and now only `DataManger` class will be handling phases and data stuff.
+- Simplified process to get data by making 3 function redesigns in `DataManager`.
+- Using functions to get story phases from `Preguntas` in `DataManager`.
+
+### Fixed
+- Spelling errors when naming several variables (Not complying with conventions)
+
+### Removed
+- `SortingHat` class does no longer exist, its tasks have been refactored.
+
+## (2.0-alpha) - 23/11/2023
 
 ### Added
 - Phases system in `MuggleOrWizard` class has been done.

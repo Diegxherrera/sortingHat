@@ -2,24 +2,24 @@ package org.nebrija3d.sortinghat;
 
 public class Preguntas {
 
-    public String introduccion(String nombre, int edad) {
+    public static String introduccion() {
 
-        String result = "Eres " + nombre + " un@ joven de " + edad + " con una vida bastante ordinaria."
-                + " Tus días transcurren entre \nla escuela,"
+        String result = "<html>Bienvenido a esta historia con una vida bastante ordinaria."
+                + " Tus días transcurren entre la escuela,"
                 + " los amigos y tu pasión secreta: los rompecabezas y los enigmas."
-                + " Aunque nunca \nte ha ocurrido nada extraordinario, "
-                + "en el fondo de tu ser hay un sentimiento que te dice que\nestás destinado "
-                + "a algo grande, algo... mágico.\n"
+                + " Aunque nunca te ha ocurrido nada extraordinario, "
+                + "en el fondo de tu ser hay un sentimiento que te dice que estás destinado "
+                + "a algo grande, algo... mágico."
                 + "Un sábado lluvioso, mientras ayudas en la limpieza "
-                + "de la antigua biblioteca del pueblo, \nun libro cubierto de polvo cae de una "
-                + "estantería directamente a tus pies.\n"
-                + "La tapa es de cuero y parece más antiguo que la propia biblioteca.\n"
-                + "Al tocarlo, sientes un cosquilleo que recorre tus dedos.";
+                + "de la antigua biblioteca del pueblo, un libro cubierto de polvo cae de una "
+                + "estantería directamente a tus pies."
+                + "La tapa es de cuero y parece más antiguo que la propia biblioteca."
+                + "Al tocarlo, sientes un cosquilleo que recorre tus dedos.</html>";
 
         return result;
     }
 
-    public String preguntaUno() {
+    public static String preguntaUno() {
 
         String result = "Pregunta 1: El Encuentro con el Libro\n"
                 + "1) ¿Sientes la emoción burbujear dentro de ti? "
@@ -31,17 +31,17 @@ public class Preguntas {
         return result;
     }
 
-    public String preguntaUnoEleccionUno() {
+    public static String preguntaUnoEleccionUno() {
 
         String result = "El libro se abre en una página que parece brillar con "
-                + "luz propia. Las letras danzan ante \ntus ojos y una voz suave, "
-                + "casi como un susurro, te invita a adentrarte en sus secretos.\n "
+                + "luz propia. Las letras danzan ante tus ojos y una voz suave, "
+                + "casi como un susurro, te invita a adentrarte en sus secretos. "
                 + "Sientes que este es el momento que has estado esperando toda tu vida.";
 
         return result;
     }
 
-    public String preguntaUnoEleccionDos() {
+    public static String preguntaUnoEleccionDos() {
 
         String result = "Mientras te alejas, el libro se cae del carrito y se "
                 + "abre en una página que emite un brillo tenue. \nNo puedes evitar "
@@ -51,7 +51,7 @@ public class Preguntas {
         return result;
     }
 
-    public String preguntaDos() {
+    public static String preguntaDos() {
 
         String result = "Pregunta 2: La Desición de investigar\n"
                 + "1) ¿Decides seguir el llamado de la aventura y leer lo que el "
@@ -62,7 +62,7 @@ public class Preguntas {
         return result;
     }
 
-    public String preguntaDosEleccionUno() {
+    public static String preguntaDosEleccionUno() {
 
         String result = "Cada palabra que lees te hace sentir más vivo, más vibrante. \n"
                 + "Y con un poco de temor y adrenalina decides llevarlo contigo a casa.\n"
@@ -71,7 +71,7 @@ public class Preguntas {
         return result;
     }
 
-    public String preguntaDosEleccionDos() {
+    public static String preguntaDosEleccionDos() {
 
         String result = "Optas por buscar ayuda, pero justo antes de hablar con "
                 + "el bibliotecario te das cuenta de que una parte "
@@ -82,7 +82,7 @@ public class Preguntas {
         return result;
     }
 
-    public String preguntaTresOpcionUno() {
+    public static String preguntaTresOpcionUno() {
 
         String result = "Pregunta 3: La Invitación Onírica\n"
                 + "Finalmente llegas a la última página que está en blanco, te quedas "
@@ -95,7 +95,7 @@ public class Preguntas {
         return result;
     }
 
-    public String preguntaTresOpcionDos() {
+    public static String preguntaTresOpcionDos() {
 
         String result = "Pregunta 3: La Invitación Onírica\n"
                 + "1) ¿Cedes a la llamada de tus sueños y decides estudiar el "
