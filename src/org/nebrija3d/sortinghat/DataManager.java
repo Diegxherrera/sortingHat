@@ -3,6 +3,7 @@ package org.nebrija3d.sortinghat;
 public class DataManager {
     static String[][] sortingHatQuestions = new String[10][5];
     static String[] nextPhases = new String[2];
+    static int[] scores;
 
     public DataManager() {
         // Sorting Hat questions
@@ -81,25 +82,38 @@ public class DataManager {
                         " sobre si eres un muggle o un mago, elije una de ellas y adentrate en este" +
                         "mundo.", new String[]{"1A", "1B"}, requestedContent);
             case "1A":
-                return requestSortingHatContent("ddd", new String[]{"2A","2B"}, requestedContent);
+                return requestSortingHatContent("", new String[]{"2A","2B"}, requestedContent);
             case "1B":
                 return requestSortingHatContent(Preguntas.preguntaUno(), new String[]{"2C","2D"}, requestedContent);
             case "2A":
-                return requestSortingHatContent("", new String[]{"",""}, requestedContent);
+                return requestSortingHatContent("", new String[]{"3A","3B"}, requestedContent);
             case "2B":
-                return requestSortingHatContent("", new String[]{"",""}, requestedContent);
+                return requestSortingHatContent("", new String[]{"3C","3D"}, requestedContent);
             case "2C":
-                return requestSortingHatContent(Preguntas.preguntaUnoEleccionUno(), new String[]{"",""}, requestedContent);
+                return requestSortingHatContent(Preguntas.preguntaUnoEleccionUno(), new String[]{"3E","3F"}, requestedContent);
             case "2D":
-                return requestSortingHatContent(Preguntas.preguntaUnoEleccionDos(), new String[]{"",""}, requestedContent);
+                return requestSortingHatContent(Preguntas.preguntaUnoEleccionDos(), new String[]{"3G","3H"}, requestedContent);
             case "3A":
-                return requestSortingHatContent(Preguntas.preguntaUnoEleccionUno(), new String[]{"",""}, requestedContent);
+                return requestSortingHatContent(Preguntas.preguntaUnoEleccionUno(), new String[]{"Resultado","Resultado"}, requestedContent);
             case "3B":
-                return requestSortingHatContent("", new String[]{"",""}, requestedContent);
+                return requestSortingHatContent("", new String[]{"Resultado","Resultado"}, requestedContent);
             case "3C":
-                return requestSortingHatContent("", new String[]{"",""}, requestedContent);
+                return requestSortingHatContent("", new String[]{"Resultado","Resultado"}, requestedContent);
             case "3D":
-                return requestSortingHatContent("", new String[]{"",""}, requestedContent);
+                return requestSortingHatContent("", new String[]{"Resultado","Resultado"}, requestedContent);
+            case "3E":
+                return requestSortingHatContent("", new String[]{"4G","4H"}, requestedContent);
+            case "3F":
+                return requestSortingHatContent("", new String[]{"4G","4H"}, requestedContent);
+            case "2R":
+                return requestSortingHatContent("", new String[]{"4G","4H"}, requestedContent);
+            case "3R":
+                return requestSortingHatContent("", new String[]{"4G","4H"}, requestedContent);
+            case "4A":
+                return requestSortingHatContent("", new String[]{"Resultado","Resultado"}, requestedContent);
+            case "4B":
+                return requestSortingHatContent("", new String[]{"Resultado","Resultado"}, requestedContent);
+
             default:
                 return "Something is not working quite well in retrieveData().";
         }
@@ -112,8 +126,14 @@ public class DataManager {
     }
     public static void nextPhaseKey(String option) {
         if (option.equals("optionOne")) {
+            if (nextPhases[0].equals("Resultado")) {
+                // Code to run when the result comes out.
+            }
             Interface.phaseKey = nextPhases[0];
         } else if (option.equals("optionTwo")) {
+            if (nextPhases[1].equals("Resultado")) {
+                DataManager.houseChecker();
+            }
             Interface.phaseKey = nextPhases[1];
         }
     }
@@ -125,6 +145,29 @@ public class DataManager {
             return "<html>" + DataManager.getSortingHatData(0) + "<html>";
         } else {
             return "The Game Checker method is not woking as expected.";
+        }
+    }
+    public static void houseChecker() {
+        scores[0] = Interface.gryffindorScore;
+        scores[1] = Interface.slytherinScore;
+        scores[2] = Interface.hufflepuffScore;
+        scores[3] = Interface.ravenclawScore;
+        int maxIndex = 0;
+
+        for (int i = 1; i < scores.length; i++) {
+            if (scores[i] > scores[maxIndex]) {
+                maxIndex = i;
+            }
+        }
+
+        if (maxIndex == 0) {
+            Interface.ventanaDeGryffindor();
+        } else if (maxIndex == 1) {
+            Interface.ventanaDeSlytherin();
+        } else if (maxIndex == 2) {
+            Interface.ventanaDeHufflepuff();
+        } else if (maxIndex == 3) {
+            Interface.ventanaDeRavenclaw();
         }
     }
 }

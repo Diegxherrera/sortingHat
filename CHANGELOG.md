@@ -1,11 +1,18 @@
 # Changelog
 
+## (2.2-alpha) - 27/11/2023
+
+### Added
+- `houseChecker()` method that implements the logic to infer the house of the player.
+- Now, `nextPhaseKey` implements the necessary logic to process next phases that lead to results.
+
 ## (2.1-alpha) - 26/11/2023
 
 ### Added
 - Now, `ventanaDePreguntas()` works for both games: Sorting Hat + Muggle or Wizard.
   - Sorting hat now has a score counter for each of the HP houses.
   - Button action listeners have logic to continue each game.
+
 ### Changed
 - Phases system got a redesign and now only `DataManger` class will be handling phases and data stuff.
 - Simplified process to get data by making 3 function redesigns in `DataManager`.
